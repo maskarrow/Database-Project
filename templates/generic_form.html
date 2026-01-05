@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+<div style="max-width: 600px; margin: 0 auto;">
+  <h2 style="margin-bottom: 2rem;">{{ title }}</h2>
+  <form method="post" class="premium-form">
+    {% csrf_token %}
+    <div class="form-content">
+      {{ form.as_p }}
+    </div>
+    <div class="actions-row">
+      <a class="btn btn-ghost" href="javascript:history.back()">Anulează</a>
+      <button type="submit" class="btn btn-primary">Salvează</button>
+    </div>
+  </form>
+</div>
+{% endblock %}

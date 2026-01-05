@@ -1,0 +1,44 @@
+{% load static %}
+<!doctype html>
+<html lang="ro">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Magazin Proiect</title>
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+
+<body>
+  <div class="app-container">
+    <nav>
+      <div class="nav-content">
+        <div class="nav-links">
+          <a href="{% url 'home' %}" class="nav-logo">MAGAZIN</a>
+          <a href="{% url 'clienti_list' %}">Clienți</a>
+          <a href="{% url 'produse_list' %}">Produse</a>
+          <a href="{% url 'producatori_list' %}">Producători</a>
+          <a href="{% url 'client_produs_list' %}">Relații Client</a>
+          <a href="{% url 'produs_producator_list' %}">Relații Producător</a>
+        </div>
+
+        <div class="user-profile">
+          {% if user.is_authenticated %}
+          <span class="user-name">{{ user.username }}</span>
+          <a href="{% url 'logout' %}" class="btn btn-ghost" style="font-size: 0.8rem;">Logout</a>
+          {% else %}
+          <a href="{% url 'login' %}" class="btn btn-primary">Autentificare</a>
+          {% endif %}
+        </div>
+      </div>
+    </nav>
+
+    <main class="main-wrapper">
+      <div class="content-card">
+        {% block content %}{% endblock %}
+      </div>
+    </main>
+  </div>
+</body>
+
+</html>

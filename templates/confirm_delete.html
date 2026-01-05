@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block content %}
+  <h2>Confirmă ștergerea</h2>
+  <p>Sigur vrei să ștergi: <b>{{ object }}</b> ?</p>
+  <form method="post">
+    {% csrf_token %}
+    <button class="btn danger" type="submit">Da, șterge</button>
+    <a class="btn" href="{% url back_url %}">Anulează</a>
+  </form>
+{% endblock %}

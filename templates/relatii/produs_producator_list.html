@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Relații Produs - Producător</h2>
+<a class="btn" href="{% url 'produs_producator_add' %}">Adaugă</a>
+<table>
+  <tr><th>Produs</th><th>Producător</th><th>Acțiuni</th></tr>
+  {% for x in items %}
+  <tr>
+    <td>{{ x.produs }}</td>
+    <td>{{ x.producator }}</td>
+    <td>
+      <a class="btn" href="{% url 'produs_producator_edit' x.pk %}">Edit</a>
+      {% if user.is_staff %}
+        <a class="btn danger" href="{% url 'produs_producator_delete' x.pk %}">Delete</a>
+      {% endif %}
+    </td>
+  </tr>
+  {% endfor %}
+</table>
+{% endblock %}

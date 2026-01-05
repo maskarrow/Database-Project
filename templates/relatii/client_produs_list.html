@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block content %}
+<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+  <h2>Relații Client - Produs</h2>
+  <a class="btn btn-primary" href="{% url 'client_produs_add' %}">Adaugă Relație</a>
+</div>
+
+<div class="table-container">
+  <table>
+    <thead>
+      <tr>
+        <th>Client</th>
+        <th>Produs</th>
+        <th style="text-align: right;">Acțiuni</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for x in items %}
+      <tr>
+        <td style="font-weight: 500;">{{ x.client }}</td>
+        <td>{{ x.produs }}</td>
+        <td style="text-align: right; display: flex; gap: 0.5rem; justify-content: flex-end;">
+          <a class="btn btn-ghost" href="{% url 'client_produs_edit' x.pk %}" style="padding: 0.25rem 0.5rem;">Edit</a>
+          {% if user.is_staff %}
+          <a class="btn btn-danger" href="{% url 'client_produs_delete' x.pk %}"
+            style="padding: 0.25rem 0.5rem;">Șterge</a>
+          {% endif %}
+        </td>
+      </tr>
+      {% empty %}
+      <tr>
+        <td colspan="3" class="empty-state">Nu există relații client-produs.</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

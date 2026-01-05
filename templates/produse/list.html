@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block content %}
+<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+  <h2>Produse</h2>
+  <a class="btn btn-primary" href="{% url 'produse_add' %}">Adaugă Produs</a>
+</div>
+
+<div class="table-container">
+  <table>
+    <thead>
+      <tr>
+        <th>Denumire</th>
+        <th>Data Producere</th>
+        <th>Data Expirare</th>
+        <th style="text-align: right;">Acțiuni</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for x in items %}
+      <tr>
+        <td style="font-weight: 500;">{{ x.denumire }}</td>
+        <td>{{ x.data_producere }}</td>
+        <td>{{ x.data_expirare }}</td>
+        <td style="text-align: right; display: flex; gap: 0.5rem; justify-content: flex-end;">
+          <a class="btn btn-ghost" href="{% url 'produse_edit' x.pk %}" style="padding: 0.25rem 0.5rem;">Edit</a>
+          {% if user.is_staff %}
+          <a class="btn btn-danger" href="{% url 'produse_delete' x.pk %}" style="padding: 0.25rem 0.5rem;">Șterge</a>
+          {% endif %}
+        </td>
+      </tr>
+      {% empty %}
+      <tr>
+        <td colspan="4" class="empty-state">Nu există produse în bază.</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}
